@@ -13,7 +13,6 @@ import java.util.Date;
 import java.util.Objects;
 @Getter
 @Setter
-@ToString
 @MappedSuperclass
 public abstract class BaseEntityAudit extends BaseEntity implements Serializable {
     private String createdBy;
