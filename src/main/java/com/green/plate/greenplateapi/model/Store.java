@@ -2,11 +2,15 @@ package com.green.plate.greenplateapi.model;
 
 import com.green.plate.greenplateapi.model.baseEntity.BaseEntityAudit;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
 @Entity(name = "store")
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Store extends BaseEntityAudit {
     @Column(nullable = false)
     private String tradeName;

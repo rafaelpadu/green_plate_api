@@ -3,7 +3,6 @@ package com.green.plate.greenplateapi.controller;
 import com.green.plate.greenplateapi.dto.CustomerDTO;
 import com.green.plate.greenplateapi.model.Customer;
 import com.green.plate.greenplateapi.service.customer.impl.CustomerServiceImpl;
-import io.swagger.annotations.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +30,6 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    @ApiResponse(code = 404, message = "Cliente não encontrado")
     public ResponseEntity<Customer> getCustomerByID(@PathVariable("id") Integer customerId) {
         return customerService
                 .getCustomerById(customerId)

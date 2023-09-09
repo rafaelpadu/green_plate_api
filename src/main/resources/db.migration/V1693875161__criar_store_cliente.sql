@@ -1,6 +1,6 @@
 CREATE TABLE address
 (
-    id         INTEGER NOT NULL,
+    id         SERIAL,
     created_by VARCHAR(255),
     updated_by VARCHAR(255),
     created_at TIMESTAMP WITHOUT TIME ZONE,
@@ -16,7 +16,7 @@ CREATE TABLE address
 );
 CREATE TABLE usuario
 (
-    id          INTEGER NOT NULL,
+    id          SERIAl,
     created_by  VARCHAR(255),
     updated_by  VARCHAR(255),
     created_at  TIMESTAMP WITHOUT TIME ZONE,
@@ -30,7 +30,7 @@ CREATE TABLE usuario
 );
 CREATE TABLE customer
 (
-    id         INTEGER NOT NULL,
+    id         SERIAL,
     created_by VARCHAR(255),
     updated_by VARCHAR(255),
     created_at TIMESTAMP WITHOUT TIME ZONE,
@@ -38,12 +38,12 @@ CREATE TABLE customer
     full_name  VARCHAR(255),
     phone      VARCHAR(255),
     address_id INTEGER,
-    user_id    INTEGER,
+    usuario_id INTEGER,
     CONSTRAINT pk_customer PRIMARY KEY (id)
 );
 CREATE TABLE product
 (
-    id          INTEGER NOT NULL,
+    id          SERIAL,
     created_by  VARCHAR(255),
     updated_by  VARCHAR(255),
     created_at  TIMESTAMP WITHOUT TIME ZONE,
@@ -57,7 +57,7 @@ CREATE TABLE product
 );
 CREATE TABLE price
 (
-    id         INTEGER NOT NULL,
+    id         SERIAL,
     created_by VARCHAR(255),
     updated_by VARCHAR(255),
     created_at TIMESTAMP WITHOUT TIME ZONE,
@@ -68,7 +68,7 @@ CREATE TABLE price
 );
 CREATE TABLE stock
 (
-    id          INTEGER NOT NULL,
+    id          SERIAL,
     created_by  VARCHAR(255),
     updated_by  VARCHAR(255),
     created_at  TIMESTAMP WITHOUT TIME ZONE,
@@ -87,9 +87,9 @@ CREATE TABLE stock_price_list
     stock_id      INTEGER NOT NULL,
     price_list_id INTEGER NOT NULL
 );
-CREATE TABLE "order"
+CREATE TABLE pedido
 (
-    id          INTEGER NOT NULL,
+    id          SERIAL,
     created_by  VARCHAR(255),
     updated_by  VARCHAR(255),
     created_at  TIMESTAMP WITHOUT TIME ZONE,
@@ -97,11 +97,11 @@ CREATE TABLE "order"
     store_id    INTEGER,
     customer_id INTEGER,
     item_total  DECIMAL,
-    CONSTRAINT pk_order PRIMARY KEY (id)
+    CONSTRAINT pk_pedido PRIMARY KEY (id)
 );
 CREATE TABLE store
 (
-    id            INTEGER      NOT NULL,
+    id            SERIAL,
     created_by    VARCHAR(255),
     updated_by    VARCHAR(255),
     created_at    TIMESTAMP WITHOUT TIME ZONE,
@@ -120,7 +120,7 @@ CREATE TABLE store_stock_list
 );
 CREATE TABLE order_item
 (
-    id            INTEGER NOT NULL,
+    id            SERIAL,
     created_by    VARCHAR(255),
     updated_by    VARCHAR(255),
     created_at    TIMESTAMP WITHOUT TIME ZONE,
@@ -130,9 +130,12 @@ CREATE TABLE order_item
     unit_value    DECIMAL,
     discount      DECIMAL,
     qty_requested INTEGER,
+    pedido_id     INTEGER,
     CONSTRAINT pk_orderitem PRIMARY KEY (id)
 );
 
+ALTER TABLE order_item
+    ADD CONSTRAINT FK_ORDERITEM_ON_PEDIDO FOREIGN KEY (pedido_id) REFERENCES pedido (id);
 ALTER TABLE order_item
     ADD CONSTRAINT FK_ORDERITEM_ON_STOCK FOREIGN KEY (stock_id) REFERENCES stock (id);
 ALTER TABLE store_stock_list
@@ -143,10 +146,10 @@ ALTER TABLE store_stock_list
     ADD CONSTRAINT fk_stostolis_on_stock FOREIGN KEY (stock_list_id) REFERENCES stock (id);
 ALTER TABLE store_stock_list
     ADD CONSTRAINT fk_stostolis_on_store FOREIGN KEY (store_id) REFERENCES store (id);
-ALTER TABLE "order"
-    ADD CONSTRAINT FK_ORDER_ON_CUSTOMER FOREIGN KEY (customer_id) REFERENCES customer (id);
-ALTER TABLE "order"
-    ADD CONSTRAINT FK_ORDER_ON_STORE FOREIGN KEY (store_id) REFERENCES store (id);
+ALTER TABLE pedido
+    ADD CONSTRAINT FK_PEDIDO_ON_CUSTOMER FOREIGN KEY (customer_id) REFERENCES customer (id);
+ALTER TABLE pedido
+    ADD CONSTRAINT FK_PEDIDO_ON_STORE FOREIGN KEY (store_id) REFERENCES store (id);
 ALTER TABLE stock_price_list
     ADD CONSTRAINT uc_stock_price_list_pricelist UNIQUE (price_list_id);
 ALTER TABLE stock
@@ -164,4 +167,4 @@ ALTER TABLE usuario
 ALTER TABLE customer
     ADD CONSTRAINT FK_CUSTOMER_ON_ADDRESS FOREIGN KEY (address_id) REFERENCES address (id);
 ALTER TABLE customer
-    ADD CONSTRAINT FK_CUSTOMER_ON_USER FOREIGN KEY (user_id) REFERENCES usuario (id);
+    ADD CONSTRAINT FK_CUSTOMER_ON_USUARIO FOREIGN KEY (usuario_id) REFERENCES usuario (id);
