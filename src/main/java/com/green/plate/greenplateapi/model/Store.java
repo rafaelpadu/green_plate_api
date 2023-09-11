@@ -16,7 +16,7 @@ public class Store extends BaseEntityAudit {
     private String tradeName;
     private String businessName;
     @OneToOne
-    @JoinColumn(name = "address_id", nullable = false)
+    @JoinColumn(name = "address_id")
     private Address address;
     @OneToMany
     private List<Stock> stockList;

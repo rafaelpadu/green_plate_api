@@ -13,7 +13,8 @@ import java.util.UUID;
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "base_entity_seq")
+    @SequenceGenerator(name = "base_entity_seq", allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Integer id;
     @Override

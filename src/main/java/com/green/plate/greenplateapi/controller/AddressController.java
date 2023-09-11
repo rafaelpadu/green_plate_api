@@ -1,13 +1,12 @@
 package com.green.plate.greenplateapi.controller;
 
 import com.green.plate.greenplateapi.dto.AddressDTO;
-import com.green.plate.greenplateapi.service.service.AddressService;
+import com.green.plate.greenplateapi.service.address.AddressService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/address")
@@ -22,5 +21,18 @@ public class AddressController {
     public ResponseEntity<Void> save(@RequestBody AddressDTO addressDTO){
         addressService.save(addressDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping("/")
+    public List<AddressDTO> getAllAddress(){
+        return addressService.getAllAddress();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AddressDTO> getAddressByID(@PathVariable Integer id ){
+        return addressService
+                .getAddressById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

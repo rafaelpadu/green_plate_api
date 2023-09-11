@@ -1,6 +1,6 @@
 package com.green.plate.greenplateapi.dto;
 
-import lombok.Value;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * DTO for {@link com.green.plate.greenplateapi.model.Address}
  */
-@Value
+@Data
 public class AddressDTO implements Serializable {
     Integer id;
     String createdBy;
