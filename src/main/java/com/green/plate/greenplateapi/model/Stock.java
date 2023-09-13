@@ -1,5 +1,6 @@
 package com.green.plate.greenplateapi.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.green.plate.greenplateapi.model.baseEntity.BaseEntityAudit;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,6 +29,7 @@ public class Stock extends BaseEntityAudit {
     private Integer minimalQty;
     @Column
     private Integer maxQty;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     @Column
     private LocalDateTime dueDate;
 }

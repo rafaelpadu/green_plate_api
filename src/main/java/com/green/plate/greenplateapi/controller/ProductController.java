@@ -3,9 +3,7 @@ package com.green.plate.greenplateapi.controller;
 import com.green.plate.greenplateapi.dto.ProductDTO;
 import com.green.plate.greenplateapi.service.product.impl.ProductServiceImpl;
 import jakarta.validation.Valid;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
