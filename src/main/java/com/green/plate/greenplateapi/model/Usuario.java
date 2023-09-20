@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.Length;
 @Entity
 @Setter
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Usuario extends BaseEntityAudit {

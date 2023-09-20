@@ -2,6 +2,8 @@ package com.green.plate.greenplateapi.controller;
 
 import com.green.plate.greenplateapi.dto.AddressDTO;
 import com.green.plate.greenplateapi.service.address.AddressService;
+import com.green.plate.greenplateapi.service.address.impl.AddressServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -5,6 +5,7 @@ import com.green.plate.greenplateapi.model.Address;
 import com.green.plate.greenplateapi.repository.AddressRepository;
 import com.green.plate.greenplateapi.service.address.AddressService;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
