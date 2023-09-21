@@ -16,7 +16,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/file")
 public class FileController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(FileController.class);
     private final FileServiceImpl fileService;
 
     public FileController(FileServiceImpl fileService) {
@@ -25,7 +24,6 @@ public class FileController {
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public List<String> addFile(@RequestParam("files") MultipartFile[] files) {
-        LOGGER.debug("Adicionar Arquivo Chamado");
         return fileService.addSingleFile(files);
     }
 }
