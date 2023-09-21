@@ -1,6 +1,8 @@
 package com.green.plate.greenplateapi.dto;
 
+import com.green.plate.greenplateapi.enums.ProductCategory;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -22,4 +24,7 @@ public class ProductDTO implements Serializable {
     Long EAN13;
     String imageUrl;
     boolean active;
+    @NotNull(message = "Todo produto precisa ter uma categoria")
+    String productCategory;
+
 }
