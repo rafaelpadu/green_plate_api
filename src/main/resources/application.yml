@@ -3,6 +3,9 @@ server:
   compression:
     enabled: 'true'
     mime-types: text/html,text/css,application/javascript,application/json,application/font-sfnt,application/font-woff,application/font-woff2
+  servlet:
+    encoding:
+      charset: UTF-8
 
 spring:
   http:

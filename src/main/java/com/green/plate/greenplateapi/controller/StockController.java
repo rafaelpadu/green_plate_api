@@ -1,16 +1,18 @@
 package com.green.plate.greenplateapi.controller;
 
 import com.green.plate.greenplateapi.dto.StockDTO;
+import com.green.plate.greenplateapi.enums.ProductCategory;
 import com.green.plate.greenplateapi.service.stock.impl.StockServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/stock")
+@RequestMapping(value = "/api/stock",produces = MediaType.APPLICATION_JSON_VALUE)
 public class StockController {
     private final StockServiceImpl stockService;
 
@@ -31,6 +33,10 @@ public class StockController {
     @GetMapping("/")
     public List<StockDTO> getAllStock() {
         return stockService.getAllStock();
+    }
+    @GetMapping("/find-by-product-category/{category}")
+    public List<StockDTO> getAllStockByProductCategory(@PathVariable ProductCategory category) {
+        return stockService.getAllStockByProductCategory(category);
     }
 
     @GetMapping("/{id}")

@@ -41,7 +41,7 @@ public class DataBucketUtil {
             StorageOptions options = StorageOptions.newBuilder().setProjectId(gcpProjectId).setCredentials(GoogleCredentials.fromStream(inputStream)).build();
             Storage storage = options.getService();
             Policy originalPolicy = storage.getIamPolicy(gcpBucketId);
-            storage.setIamPolicy(gcpBucketId, originalPolicy.toBuilder().addIdentity(StorageRoles.objectViewer(), Identity.allUsers()).build());
+            storage.setIamPolicy(gcpBucketId, originalPolicy.toBuilder().addIdentity(StorageRoles.legacyObjectReader(), Identity.allUsers()).build());
             Bucket bucket = storage.get(gcpBucketId, Storage.BucketGetOption.fields());
             RandomString id = new RandomString(6, ThreadLocalRandom.current());
             Blob blob = bucket.create(gcpDirectoryName + "/" + fileName + "-" + id.nextString() + checkFileExtension(fileName), fileData, contentType);
@@ -59,7 +59,8 @@ public class DataBucketUtil {
             if(file.getOriginalFilename() == null){
                 throw new BadRequestException("Original file name is null");
             }
-            File convertedFile = new File(file.getOriginalFilename());
+            String fileTempPath = "src/main/resources/temp-files/" + file.getOriginalFilename();
+            File convertedFile = new File(fileTempPath);
             FileOutputStream outputStream = new FileOutputStream(convertedFile);
             outputStream.write(file.getBytes());
             outputStream.close();

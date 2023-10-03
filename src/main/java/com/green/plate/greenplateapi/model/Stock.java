@@ -21,7 +21,7 @@ public class Stock extends BaseEntityAudit {
     private Store store;
     @ManyToOne
     private Product product;
-    @OneToMany
+    @OneToMany(mappedBy = "stock")
     private List<Price> priceList;
     @Column
     private Integer currentQty;

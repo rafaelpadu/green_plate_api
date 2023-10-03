@@ -14,12 +14,10 @@ import java.util.Date;
 @Data
 public class OrderItemDTO implements Serializable {
     Integer id;
-    String createdBy;
-    String updatedBy;
     Date createdAt;
     Date updatedAt;
     @NotNull
-    Integer stockId;
+    StockDTO stockDTO;
     BigDecimal itemTotal;
     BigDecimal unitValue;
     BigDecimal discount;

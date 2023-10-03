@@ -15,8 +15,6 @@ import java.util.List;
 @Data
 public class PedidoDTO implements Serializable {
     Integer id;
-    String createdBy;
-    String updatedBy;
     Date createdAt;
     Date updatedAt;
     @NotNull

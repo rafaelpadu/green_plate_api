@@ -11,8 +11,6 @@ import java.util.Date;
 @Data
 public class AddressDTO implements Serializable {
     Integer id;
-    String createdBy;
-    String updatedBy;
     Date createdAt;
     Date updatedAt;
     Integer cep;

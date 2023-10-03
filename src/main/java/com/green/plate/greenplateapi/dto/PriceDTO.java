@@ -15,8 +15,6 @@ import java.util.Date;
 @Data
 public class PriceDTO implements Serializable {
     Integer id;
-    String createdBy;
-    String updatedBy;
     Date createdAt;
     Date updatedAt;
     @NotNull(message = "O valor do preço não pode ser nulo")
