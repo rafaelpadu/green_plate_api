@@ -18,6 +18,7 @@ public class StockDTO implements Serializable {
     Date createdAt;
     Date updatedAt;
     Integer storeId;
+    String storeTradeName;
     ProductDTO productDTO;
     Integer currentQty;
     Integer minimalQty;

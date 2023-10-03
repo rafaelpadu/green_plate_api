@@ -3,6 +3,7 @@ package com.green.plate.greenplateapi.controller;
 import com.green.plate.greenplateapi.dto.StockDTO;
 import com.green.plate.greenplateapi.enums.ProductCategory;
 import com.green.plate.greenplateapi.service.stock.impl.StockServiceImpl;
+import com.green.plate.greenplateapi.utils.PageFilter;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -45,5 +46,10 @@ public class StockController {
                 .getStockById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping("/search-anything")
+    public List<StockDTO> getStockListByAnything(@RequestBody PageFilter pageFilter){
+        return stockService.getStockListByAnything(pageFilter);
     }
 }
