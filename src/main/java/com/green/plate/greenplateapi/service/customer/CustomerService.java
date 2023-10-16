@@ -9,9 +9,11 @@ import java.util.Optional;
 
 public interface CustomerService {
 
-    void save(CustomerDTO customerDTO);
+    CustomerDTO save(CustomerDTO customerDTO);
 
     List<Customer> getAllCustomers();
 
     Optional<Customer> getCustomerById(Integer customerId);
+    Optional<CustomerDTO> getCustomerByUserId(Integer userId);
+
 }

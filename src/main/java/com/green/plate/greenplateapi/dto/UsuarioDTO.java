@@ -13,12 +13,11 @@ import java.io.Serializable;
  * DTO for {@link com.green.plate.greenplateapi.model.Usuario}
  */
 @Data
-@Builder
 public class UsuarioDTO implements Serializable {
     Integer id;
     String userName;
     String email;
-    String passWord;
+    String password;
     Integer customerId;
     boolean active;
 }

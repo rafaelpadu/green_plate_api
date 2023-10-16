@@ -19,15 +19,11 @@ public class CustomerServiceImpl implements CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    private Customer mapCustomer(CustomerDTO customerDTO) {
-        ModelMapper modelMapper = new ModelMapper();
-       return modelMapper.map(customerDTO, Customer.class);
-    }
 
     @Override
-    public void save(CustomerDTO customerDTO) {
+    public CustomerDTO save(CustomerDTO customerDTO) {
         Customer customer = mapCustomer(customerDTO);
-        customerRepository.save(customer);
+        return mapCustomerDTO(customerRepository.save(customer));
     }
 
     @Override
@@ -38,5 +34,20 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Optional<Customer> getCustomerById(Integer customerId) {
         return customerRepository.findById(customerId);
+    }
+
+    @Override
+    public Optional<CustomerDTO> getCustomerByUserId(Integer userId) {
+        return customerRepository.findByUsuario_Id(userId).map(this::mapCustomerDTO);
+    }
+
+    private Customer mapCustomer(CustomerDTO customerDTO) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(customerDTO, Customer.class);
+    }
+
+    private CustomerDTO mapCustomerDTO(Customer customer) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(customer, CustomerDTO.class);
     }
 }

@@ -35,7 +35,7 @@ springdoc:
     path: /api-docs
 authentication:
   jwtToken:
-    secret: '123456789'
+    secret: '123456789asuhduahsdakjsjnfaok23@#*y54alksnduaish*@#&@*#nmalskjnd219382938KANSDKljasjik2324524'
 
 gcp:
   config:

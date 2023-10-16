@@ -9,5 +9,7 @@ public interface TokenService {
 
     String generateAccessToken(Usuario usuario);
 
-    String generateRefreshToken(Usuario user, String origin);
+    String generateRefreshToken(Usuario user);
+
+    boolean isPasswordValid(Usuario usuario, String password);
 }
