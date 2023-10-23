@@ -34,5 +34,9 @@ public class Usuario extends BaseEntityAudit {
     private String refreshToken;
     @Transient
     private String token;
+    @Column
+    private String secretQuestion;
+    @Column
+    private String secretAnswer;
 
 }

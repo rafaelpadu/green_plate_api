@@ -1,6 +1,6 @@
 package com.green.plate.greenplateapi.service.usuario.impl;
 
-import com.green.plate.greenplateapi.dto.NewPasswordDTO;
+import com.green.plate.greenplateapi.dto.ChangePasswordDTO;
 import com.green.plate.greenplateapi.dto.UsuarioDTO;
 import com.green.plate.greenplateapi.model.Usuario;
 import com.green.plate.greenplateapi.repository.UsuarioRepository;
@@ -9,7 +9,6 @@ import com.green.plate.greenplateapi.service.usuario.UsuarioService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,6 +46,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Optional<Usuario> getUsuarioByUserName(String userName) {
         return usuarioRepository.findByUserName(userName.toLowerCase());
     }
+
+    @Override
+    public Optional<UsuarioDTO> checkUsuarioByUserName(String userName) {
+        return this.getUsuarioByUserName(userName).map(this::mapToUsuarioDTO);
+    }
+
     @Override
     public void login(Usuario usuario) {
         String refreshToken = tokenService.generateRefreshToken(usuario);
@@ -57,8 +62,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public void updatePassword(Usuario usuario, NewPasswordDTO newPasswordDTO) {
-        String newPass = DigestUtils.sha1Hex(newPasswordDTO.getNewPassword());
+    public void updatePassword(Usuario usuario, ChangePasswordDTO changePasswordDTO) {
+        String newPass = DigestUtils.sha1Hex(changePasswordDTO.getNewPassword());
         usuarioRepository.updatePassword(newPass, usuario.getId());
     }
 

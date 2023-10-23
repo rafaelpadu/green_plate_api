@@ -1,5 +1,6 @@
 package com.green.plate.greenplateapi.dto;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
@@ -20,4 +21,6 @@ public class UsuarioDTO implements Serializable {
     String password;
     Integer customerId;
     boolean active;
+    String secretQuestion;
+    String secretAnswer;
 }

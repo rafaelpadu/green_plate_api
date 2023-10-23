@@ -3,9 +3,9 @@ package com.green.plate.greenplateapi.dto;
 import lombok.Data;
 
 @Data
-public class NewPasswordDTO {
+public class ChangePasswordDTO {
 
-    private String userName;
+    private Integer userId;
     private String oldPassword;
     private String newPassword;
 }

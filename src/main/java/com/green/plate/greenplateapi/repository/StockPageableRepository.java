@@ -13,7 +13,7 @@ public interface StockPageableRepository extends PagingAndSortingRepository<Stoc
             "FROM Stock s " +
             "join s.store st " +
             "join s.product p " +
-            "WHERE st.tradeName LIKE CONCAT('%', :queryText, '%') OR p.name LIKE  CONCAT('%', :queryText, '%')")
+            "WHERE st.tradeName ILIKE CONCAT('%', :queryText, '%') OR p.name ILIKE  CONCAT('%', :queryText, '%')")
     List<Stock> findStockByAnything(String queryText, Pageable pageable);
 
 }
