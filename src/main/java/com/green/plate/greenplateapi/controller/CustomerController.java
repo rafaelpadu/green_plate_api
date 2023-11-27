@@ -23,6 +23,11 @@ public class CustomerController {
         customerDTO = customerService.save(customerDTO);
         return new ResponseEntity<>(customerDTO, HttpStatus.CREATED);
     }
+    @PutMapping("/secure/update")
+    public ResponseEntity<CustomerDTO> updateCustomer(@RequestBody CustomerDTO customerDTO) {
+        customerDTO = customerService.update(customerDTO);
+        return new ResponseEntity<>(customerDTO, HttpStatus.ACCEPTED);
+    }
 
     @GetMapping("/")
     public List<Customer> getAllCustomer() {

@@ -12,4 +12,6 @@ public class CustomerDTO implements Serializable {
     Integer id;
     String fullName;
     String phone;
+    String email;
+    String cpf;
 }

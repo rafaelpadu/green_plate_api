@@ -17,8 +17,10 @@ import org.hibernate.validator.constraints.Length;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Usuario extends BaseEntityAudit {
+
     @Column(nullable = false, unique = true)
     private String userName;
+
     @NotBlank(message = "E-mail é obrigatorio")
     @Email(message = "E-mail não é válido", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     @Column(name = "email", nullable = false, unique = true)

@@ -48,8 +48,8 @@ public class AuthenticationController {
         return new ResponseEntity<>(jsonStruct, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/refresh")
-    public ResponseEntity<JsonStruct> refreshToken(@RequestParam("refreshToken") String refToken){
+    @GetMapping(value = "/refresh/{refreshToken}")
+    public ResponseEntity<JsonStruct> refreshToken(@PathVariable("refreshToken") String refToken){
         JsonStruct struct = new JsonStruct();
         Optional<Usuario> usuario = usuarioService.findByRefreshToken(refToken);
         if(usuario.isEmpty()){

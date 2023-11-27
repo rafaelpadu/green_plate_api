@@ -10,6 +10,7 @@ import java.util.Optional;
 public interface CustomerService {
 
     CustomerDTO save(CustomerDTO customerDTO);
+    CustomerDTO update(CustomerDTO customerDTO);
 
     List<Customer> getAllCustomers();
 
