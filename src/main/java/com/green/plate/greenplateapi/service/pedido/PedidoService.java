@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PedidoService {
-    PedidoDTO savePedido(PedidoDTO pedidoDTO);
+    void savePedido(PedidoDTO pedidoDTO, Integer userId);
 
     List<PedidoDTO> getAllPedidos();
 

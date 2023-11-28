@@ -26,4 +26,6 @@ public class Pedido extends BaseEntityAudit {
     @ValidPrice
     @Column
     private BigDecimal itemTotal;
+
+
 }

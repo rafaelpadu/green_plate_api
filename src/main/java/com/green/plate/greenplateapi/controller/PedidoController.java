@@ -3,6 +3,9 @@ package com.green.plate.greenplateapi.controller;
 import com.green.plate.greenplateapi.dto.PedidoDTO;
 import com.green.plate.greenplateapi.service.pedido.impl.PedidoServiceImpl;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,11 +22,13 @@ public class PedidoController {
         this.pedidoService = pedidoService;
     }
 
-    @PostMapping("/")
-    public ResponseEntity<PedidoDTO> newPedido(@RequestBody @Valid PedidoDTO pedidoDTO) {
+    @PostMapping("/new-pedido/{userId}")
+    public ResponseEntity<PedidoDTO> newPedido(@RequestBody @Valid PedidoDTO pedidoDTO, @PathVariable("userId") Integer userId) {
         try {
-            pedidoDTO = pedidoService.savePedido(pedidoDTO);
+            pedidoService.savePedido(pedidoDTO, userId);
         } catch (Exception e) {
+            Logger logger = LoggerFactory.getLogger(PedidoController.class);
+            logger.error(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(pedidoDTO);

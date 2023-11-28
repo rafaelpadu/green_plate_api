@@ -17,15 +17,15 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class OrderItem extends BaseEntityAudit {
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "stock_id")
     private Stock stock;
-    @ValidPrice
+//    @ValidPrice
     @Column
     private BigDecimal itemTotal;
-    @ValidPrice
+//    @ValidPrice
     @Column
     private BigDecimal unitValue;
-    @ValidPrice
+//    @ValidPrice
     @Column
     private BigDecimal discount;
     @Column

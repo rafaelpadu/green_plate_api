@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Price extends BaseEntityAudit {
-    @ValidPrice
+//    @ValidPrice
     @Column(name = "unit_value")
     private BigDecimal unitValue;
     @JsonBackReference

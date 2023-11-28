@@ -1,6 +1,7 @@
 package com.green.plate.greenplateapi.dto;
 
 import com.green.plate.greenplateapi.model.OrderItem;
+import com.green.plate.greenplateapi.utils.PriceUtils;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -16,11 +17,13 @@ public class OrderItemDTO implements Serializable {
     Integer id;
     Date createdAt;
     Date updatedAt;
-    @NotNull
-    StockDTO stockDTO;
+    Integer stockId;
     BigDecimal itemTotal;
     BigDecimal unitValue;
     BigDecimal discount;
     Integer qtyRequested;
     Integer pedidoId;
+    public void setItemTotal(BigDecimal itemTotal) {
+        this.itemTotal = PriceUtils.roundOrFixPrice(itemTotal);
+    }
 }

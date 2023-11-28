@@ -1,8 +1,11 @@
 package com.green.plate.greenplateapi.service.orderItem.impl;
 
 import com.green.plate.greenplateapi.dto.OrderItemDTO;
+import com.green.plate.greenplateapi.exception.GreenPlateException;
 import com.green.plate.greenplateapi.model.OrderItem;
+import com.green.plate.greenplateapi.model.Stock;
 import com.green.plate.greenplateapi.repository.OrderItemRepository;
+import com.green.plate.greenplateapi.repository.StockRepository;
 import com.green.plate.greenplateapi.service.orderItem.OrderItemService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -15,14 +18,20 @@ import java.util.stream.Collectors;
 public class OrderItemServiceImpl implements OrderItemService {
 
     private final OrderItemRepository orderItemRepository;
+    private final StockRepository stockRepository;
 
-    public OrderItemServiceImpl(OrderItemRepository orderItemRepository) {
+    public OrderItemServiceImpl(OrderItemRepository orderItemRepository,
+                                StockRepository stockRepository) {
         this.orderItemRepository = orderItemRepository;
+        this.stockRepository = stockRepository;
     }
 
     @Override
     public OrderItemDTO saveOrderItem(OrderItemDTO orderItemDTO) {
-        return mapToOrderItemDTO(orderItemRepository.save(mapToOrderItem(orderItemDTO)));
+        Stock stock = stockRepository.findById(orderItemDTO.getStockId()).orElseThrow(GreenPlateException::new);
+        OrderItem orderItem = mapToOrderItem(orderItemDTO);
+        orderItem.setStock(stock);
+        return mapToOrderItemDTO(orderItemRepository.save(orderItem));
     }
 
     @Override
