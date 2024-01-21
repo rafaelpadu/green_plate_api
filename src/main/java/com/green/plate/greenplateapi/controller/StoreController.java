@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/store/")
+@RequestMapping("/api/store")
 public class StoreController {
 
     private final StoreServiceImpl storeService;

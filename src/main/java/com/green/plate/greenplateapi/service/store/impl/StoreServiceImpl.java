@@ -29,7 +29,7 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public StoreDTO save(StoreDTO storeDTO) {
         Store store = mapStoreDTO(storeDTO);
-       return mapStore(storeRepository.save(store));
+        return mapStore(storeRepository.save(store));
     }
 
     @Override
@@ -45,17 +45,18 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public StoreDTO editStoreLogo(Integer id, MultipartFile[] files) {
-      StoreDTO storeDTO = getStoreById(id).orElseThrow(() -> new ResourceNotFoundException("Loja não encontrada"));
+        StoreDTO storeDTO = getStoreById(id).orElseThrow(() -> new ResourceNotFoundException("Loja não encontrada"));
         String imageUrl = fileService.addSingleFile(files).get(0);
         storeDTO.setLogoImgUrl(imageUrl);
         return save(storeDTO);
     }
 
-    private Store mapStoreDTO(StoreDTO storeDTO){
+    private Store mapStoreDTO(StoreDTO storeDTO) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(storeDTO, Store.class);
     }
-    private StoreDTO mapStore(Store store){
+
+    private StoreDTO mapStore(Store store) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(store, StoreDTO.class);
     }

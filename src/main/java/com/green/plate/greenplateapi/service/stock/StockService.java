@@ -18,4 +18,6 @@ public interface StockService {
     List<StockDTO> getAllStockByProductCategory(ProductCategory category);
 
     List<StockDTO> getStockListByAnything(PageFilter pageFilter);
+
+    List<StockDTO> getStockListByStoreIdByAnything(PageFilter pageFilter, Integer storeId);
 }

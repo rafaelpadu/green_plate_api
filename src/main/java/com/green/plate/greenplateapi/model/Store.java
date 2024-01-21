@@ -1,5 +1,6 @@
 package com.green.plate.greenplateapi.model;
 
+import com.green.plate.greenplateapi.enums.StoreType;
 import com.green.plate.greenplateapi.model.baseEntity.BaseEntityAudit;
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,5 +23,10 @@ public class Store extends BaseEntityAudit {
     private List<Stock> stockList;
     @Column
     private String logoImgUrl;
+    @Column
+    private double rating;
+    @Column
+    @Enumerated(value = EnumType.STRING)
+    private StoreType storeType;
 
 }

@@ -1,5 +1,6 @@
 package com.green.plate.greenplateapi.dto;
 
+import com.green.plate.greenplateapi.enums.StoreType;
 import lombok.Data;
 import lombok.Value;
 
@@ -15,4 +16,6 @@ public class StoreDTO implements Serializable {
     String businessName;
     String logoImgUrl;
     Integer addressId;
+    double rating;
+    StoreType storeType;
 }

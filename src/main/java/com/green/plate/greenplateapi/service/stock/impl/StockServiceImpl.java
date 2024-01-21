@@ -7,9 +7,11 @@ import com.green.plate.greenplateapi.enums.ProductCategory;
 import com.green.plate.greenplateapi.exception.ResourceNotFoundException;
 import com.green.plate.greenplateapi.model.Product;
 import com.green.plate.greenplateapi.model.Stock;
+import com.green.plate.greenplateapi.model.Store;
 import com.green.plate.greenplateapi.repository.ProductRepository;
 import com.green.plate.greenplateapi.repository.StockPageableRepository;
 import com.green.plate.greenplateapi.repository.StockRepository;
+import com.green.plate.greenplateapi.repository.StoreRepository;
 import com.green.plate.greenplateapi.service.stock.StockService;
 import com.green.plate.greenplateapi.utils.PageFilter;
 import org.modelmapper.ModelMapper;
@@ -30,13 +32,16 @@ public class StockServiceImpl implements StockService {
     private final StockRepository stockRepository;
     private final ProductRepository productRepository;
     private final StockPageableRepository stockPageableRepository;
+    private final StoreRepository storeRepository;
 
     public StockServiceImpl(StockRepository stockRepository,
                             ProductRepository productRepository,
-                            StockPageableRepository stockPageableRepository) {
+                            StockPageableRepository stockPageableRepository,
+                            StoreRepository storeRepository) {
         this.stockRepository = stockRepository;
         this.productRepository = productRepository;
         this.stockPageableRepository = stockPageableRepository;
+        this.storeRepository = storeRepository;
     }
 
     @Override
@@ -66,10 +71,23 @@ public class StockServiceImpl implements StockService {
     public List<StockDTO> getStockListByAnything(PageFilter pageFilter) {
         List<StockDTO> stockDTOList;
         Pageable pageable = PageRequest.of(pageFilter.getPageNumber(), pageFilter.getPageSize());
-        if(pageFilter.getQueryText() == null){
+        if (pageFilter.getQueryText() == null || pageFilter.getQueryText().isBlank() || pageFilter.getQueryText().isEmpty()) {
             stockDTOList = stockPageableRepository.findAll(pageable).stream().map(this::mapToStockDTO).toList();
-        }else{
+        } else {
             stockDTOList = stockPageableRepository.findStockByAnything(pageFilter.getQueryText(), pageable).stream().map(this::mapToStockDTO).collect(Collectors.toList());
+        }
+        return stockDTOList;
+    }
+
+    @Override
+    public List<StockDTO> getStockListByStoreIdByAnything(PageFilter pageFilter, Integer storeId) {
+        List<StockDTO> stockDTOList;
+        Pageable pageable = PageRequest.of(pageFilter.getPageNumber(), pageFilter.getPageSize());
+        Store store = storeRepository.findById(storeId).orElseThrow();
+        if (pageFilter.getQueryText() == null || pageFilter.getQueryText().isBlank() || pageFilter.getQueryText().isEmpty()) {
+            stockDTOList = stockPageableRepository.findByStoreAndProduct_ActiveTrue(store, pageable).stream().map(this::mapToStockDTO).toList();
+        } else {
+            stockDTOList = stockPageableRepository.findStockByStoreIdByAnything(store, pageFilter.getQueryText(), pageable).stream().map(this::mapToStockDTO).collect(Collectors.toList());
         }
         return stockDTOList;
     }

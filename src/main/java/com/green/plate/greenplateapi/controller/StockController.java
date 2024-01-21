@@ -52,4 +52,8 @@ public class StockController {
     public List<StockDTO> getStockListByAnything(@RequestBody PageFilter pageFilter){
         return stockService.getStockListByAnything(pageFilter);
     }
+    @PostMapping("/search-anything-by-store/{storeId}")
+    public List<StockDTO> getStockListByStoreIdByAnything(@RequestBody PageFilter pageFilter, @PathVariable Integer storeId){
+        return stockService.getStockListByStoreIdByAnything(pageFilter, storeId);
+    }
 }
